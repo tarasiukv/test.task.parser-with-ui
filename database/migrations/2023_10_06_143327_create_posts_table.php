@@ -15,10 +15,9 @@ return new class extends Migration
             $table->id();
             $table->string('title')->nullable();
             $table->string('link')->nullable();
-            $table->string('description')->nullable();
-            $table->string('category')->nullable();
+            $table->text('description')->nullable();
+            $table->text('category')->nullable();
             $table->string('creator')->nullable();
-            $table->string('img')->nullable();
             $table->timestamps();
         });
     }

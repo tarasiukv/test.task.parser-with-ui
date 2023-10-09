@@ -6,6 +6,7 @@ use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Http;
 use App\Models\Post;
 use SimpleXMLElement;
+use function Laravel\Prompts\text;
 
 
 class ParsePosts extends Command
@@ -36,7 +37,6 @@ class ParsePosts extends Command
     {
         $response = Http::get('https://lifehacker.com/rss');
 
-
         if($response->successful()) {
             $data = new SimpleXMLElement($response->body());
 
@@ -49,8 +49,7 @@ class ParsePosts extends Command
                 $post->description = $item->description ? strip_tags((string)$item->description) : null;
                 $post->category = $item->category ? implode('; ', (array)$item->category) : null;
                 $post->creator = isset($item->children('dc', true)->creator) ? (string)$item->children('dc', true)->creator : null;
-                $post->img = isset($item->children('media', true)->thumbnail['url']) ? (string)$item->children('media', true)->thumbnail['url'] : null;
-                $post->save;
+                $post->save();
             }
         } else {
             $this->error('Error while parse. ', $response->status());

@@ -19,6 +19,14 @@ class Post extends Model
         'description',
         'category',
         'creator',
-        'img',
     ];
+
+    public function scopeSearch($query, $search_text)
+    {
+        return $query->where(function ($query) use ($search_text) {
+            $query->whereRaw("LOWER(title) like '%" . mb_strtolower($search_text) . "%'")
+                ->orWhereRaw("LOWER(description) like '%" . mb_strtolower($search_text) . "%'")
+                ->orWhereRaw("LOWER(category) like '%" . mb_strtolower($search_text) . "%'");
+        });
+    }
 }
