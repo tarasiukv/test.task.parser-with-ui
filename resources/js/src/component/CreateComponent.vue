@@ -61,7 +61,9 @@ const {post, storePost} = usePosts();
                         type="submit"
                         class="btn btn-primary"
                         @click.prevent="storePost"
-                    >Submit</button>
+                    >
+                      Submit
+                    </button>
                   </div>
                 </form>
               </div>
