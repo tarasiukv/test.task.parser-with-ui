@@ -13,16 +13,16 @@ class PostController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        PostResource::collection(Post::all());
+        return PostResource::collection(Post::all());
     }
 
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(PostRequest $request)
     {
         return Post::create($request->validated());
     }

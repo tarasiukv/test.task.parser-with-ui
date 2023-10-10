@@ -1,23 +1,18 @@
-import {ref, inject} from "vue";
-import {useRouter} from "vue-router";
+import {computed, ref} from "vue";
 import axios from "axios";
-import {createLogger} from "vite";
+
 
 export default function usePosts() {
     const posts = ref([])
     const post = ref({})
-    const router = useRouter()
-    const store = inject('store')
-
 
     /**
      * @returns {Promise<void>}
      */
-    const getPosts = async () => {
+    const getPosts = async (page = 1) => {
         try {
-            const response = await axios.get('/api/posts')
+            const response = await axios.get('/api/posts');
             posts.value = response.data.data
-
         } catch (e) {
             console.log(e)
         }
@@ -42,17 +37,16 @@ export default function usePosts() {
     }
 
     /**
-     * @param form_data
      * @returns {Promise<boolean>}
      */
-    const storePost = async (form_data) => {
+    const storePost = async () => {
         try {
             let request_config = {
                 headers: {
                     'authorization': 'Bearer ' + localStorage.getItem('access_token')
                 }
             };
-            const response = await axios.post('/api/posts', form_data, request_config)
+            const response = await axios.post('/api/posts', post.value, request_config)
 
             return response.data;
         } catch (e) {
@@ -66,11 +60,10 @@ export default function usePosts() {
 
 
     /**
-     * @param id
-     * @param form_data
+     * @param post
      * @returns {Promise<boolean>}
      */
-    const updatePost = async (id, form_data) => {
+    const updatePost = async (post) => {
 
         try {
             let request_config = {
@@ -78,7 +71,12 @@ export default function usePosts() {
                     'authorization': 'Bearer ' + localStorage.getItem('access_token'),
                     'Accept': 'application/json',                }
             }
-            const response = await axios.post('/api/posts/' + id, form_data, request_config)
+            const response = await axios.post('/api/posts/' + post.id, {
+                title: post.title,
+                description: post.description,
+                category: post.category,
+                creator: post.creator
+            }, request_config)
 
         } catch (e) {
             if (e.response && e.response.status === 401) {

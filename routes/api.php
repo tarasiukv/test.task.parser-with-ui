@@ -10,13 +10,14 @@ use Illuminate\Support\Facades\Route;
  */
 Route::resource('users', UserController::class);
 
+
 /**
  * POST
  */
 Route::get('posts', [PostController::class, 'index']);
 Route::get('posts/{post}', [PostController::class, 'show']);
 Route::post('posts/search', [PostController::class, 'search']);
-Route::group(['middleware' => ['auth', 'App\Http\Middleware\CheckRole:admin']], function ($router) {
+Route::group(['middleware' => 'auth'], function ($router) {
     Route::post('posts', [PostController::class, 'store']);
     Route::get('posts/{post}/edit', [PostController::class, 'edit']);
     Route::post('posts/{post}', [PostController::class, 'update']);

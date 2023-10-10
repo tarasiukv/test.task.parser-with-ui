@@ -19,13 +19,4 @@ export default defineConfig({
             '@composable': path.resolve(__dirname, 'resources/js/composables'),
         }
     },
-    optimizeDeps: {
-        include: [
-            "axios",
-            "laravel-vite-plugin",
-            "vue",
-            "vue-router",
-            "@vitejs/plugin-vue"
-        ],
-    },
 });
