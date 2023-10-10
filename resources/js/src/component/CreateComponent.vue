@@ -32,21 +32,19 @@ const {post, storePost} = usePosts();
                     </div>
                     <div class="form-group">
                       <label>Description</label>
-                      <input
-                          type="text"
+                      <textarea
                           class="form-control"
                           placeholder="Description"
                           v-model="post.description"
-                      >
+                      ></textarea>
                     </div>
                     <div class="form-group">
                       <label>Category</label>
-                      <input
-                          type="text"
+                      <textarea
                           class="form-control"
                           placeholder="Category"
                           v-model="post.category"
-                      >
+                      ></textarea>
                     </div>
                     <div class="form-group">
                       <label>Creator</label>
