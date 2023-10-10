@@ -28,8 +28,7 @@ export default function usePosts() {
         try {
             let request_config = {}
             const response = await axios.get('/api/posts/' + id, request_config)
-            post.value = response.data.data
-
+            post.value = response.data
         } catch (e) {
             console.log(e)
         }
@@ -64,14 +63,13 @@ export default function usePosts() {
      * @returns {Promise<boolean>}
      */
     const updatePost = async (post) => {
-
         try {
             let request_config = {
                 headers: {
                     'authorization': 'Bearer ' + localStorage.getItem('access_token'),
                     'Accept': 'application/json',                }
             }
-            const response = await axios.post('/api/posts/' + post.id, {
+            const response = await axios.put('/api/posts/' + post.id, {
                 title: post.title,
                 description: post.description,
                 category: post.category,

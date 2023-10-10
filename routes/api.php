@@ -17,11 +17,13 @@ Route::resource('users', UserController::class);
 Route::get('posts', [PostController::class, 'index']);
 Route::get('posts/{post}', [PostController::class, 'show']);
 Route::post('posts/search', [PostController::class, 'search']);
+//with auth
 Route::group(['middleware' => 'auth'], function ($router) {
+    Route::get('posts/create', [PostController::class, 'create']);
     Route::post('posts', [PostController::class, 'store']);
     Route::get('posts/{post}/edit', [PostController::class, 'edit']);
-    Route::post('posts/{post}', [PostController::class, 'update']);
-    Route::delete('posts/{post}', [PostController::class, 'delete']);
+    Route::put('posts/{post}', [PostController::class, 'update']);
+    Route::delete('posts/{post}', [PostController::class, 'destroy']);
 });
 
 /** Auth route with JWT */

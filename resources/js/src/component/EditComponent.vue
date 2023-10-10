@@ -1,11 +1,18 @@
 <script setup>
+import {onMounted} from "vue";
+import {useRouter} from "vue-router";
 import usePosts from "@composable/post.js";
 import SidebarComponent from "@component/SidebarComponent.vue";
-import router from "../../router/router.js";
-import {onMounted} from "vue";
 
+const router = useRouter();
 const {post, getPost, updatePost} = usePosts();
+
 const post_id = router.currentRoute.value.params.id;
+
+const submitForm = async () => {
+  await updatePost(post.value);
+  await router.push('/');
+}
 
 onMounted(() => {
   getPost(post_id);
@@ -19,12 +26,12 @@ onMounted(() => {
       <section class="content">
         <div class="container-fluid">
           <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-8">
               <div class="card card-primary">
                 <div class="card-header">
-                  <h3 class="card-title">Quick Example</h3>
+                  <h3 class="card-title">Edit post with ID:</h3>
                 </div>
-                <form method="POST">
+                <form>
                   <div class="card-body">
                     <div class="form-group">
                       <label>Title</label>
@@ -37,21 +44,19 @@ onMounted(() => {
                     </div>
                     <div class="form-group">
                       <label>Description</label>
-                      <input
-                          type="text"
+                      <textarea
                           class="form-control"
                           placeholder="Description"
                           v-model="post.description"
-                      >
+                      ></textarea>
                     </div>
                     <div class="form-group">
                       <label>Category</label>
-                      <input
-                          type="text"
+                      <textarea
                           class="form-control"
                           placeholder="Category"
                           v-model="post.category"
-                      >
+                      ></textarea>
                     </div>
                     <div class="form-group">
                       <label>Creator</label>
@@ -67,8 +72,10 @@ onMounted(() => {
                     <button
                         type="submit"
                         class="btn btn-primary"
-                        @click.prevent="updatePost"
-                    >Submit</button>
+                        @click.prevent="submitForm"
+                    >
+                      Submit
+                    </button>
                   </div>
                 </form>
               </div>
