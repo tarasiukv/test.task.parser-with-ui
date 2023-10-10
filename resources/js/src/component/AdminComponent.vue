@@ -94,15 +94,20 @@ const sortedPosts = computed(() => {
                         :key="post.id"
                     >
                       <td><a :href="post.link">{{ post.title }}</a></td>
-
                       <td>{{ post.description }}</td>
                       <td>{{ post.category }}</td>
                       <td>{{post.creator }}</td>
-                      <td><button
+                      <td>
+                        <button
+                          class="btn btn-sm btn-default"
                           @click.prevent="destroyPost(post.id)"
-                      >Del</button>
-                        <a :href="'/edit/' + post.id"><button
-                        ></button>Edit</a></td>
+                        >
+                          Delete
+                        </button>
+                        <a :href="'/edit/' + post.id">
+                          <button class="btn btn-sm btn-default">Edit</button>
+                        </a>
+                      </td>
                     </tr>
                     </tbody>
                   </table>
