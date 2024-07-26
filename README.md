@@ -10,7 +10,8 @@ Laravel parser with Admin UI.
 # What's inside
 
 Contains: 
- - Laravel, Vue.js, vite, Doctrine
+ - Laravel, Vue.js, vite, JWT, MySQL
+ - Shedule
 
 # Installation
 
