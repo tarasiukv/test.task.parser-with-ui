@@ -1,8 +1,16 @@
 # Scraper #
 Laravel parser with Admin UI.
 
-## Link for scraper ##
-- default - http://lifehacker.com/rss
+- Test task
+    * [What's inside](#What's_inside)
+    * [Installation](#installation)
+    * [Run project](#run_project)
+    * [Issues](#issues)
+
+# What's inside
+
+Contains: 
+ - Laravel, Vue.js, vite, Doctrine
 
 # Installation
 
@@ -27,6 +35,7 @@ Laravel parser with Admin UI.
 
 - Make changes to the `.env` file (add your database)
 
+# Run project
 
 - Run parse:
   - schedule (every 5 min):
@@ -41,6 +50,9 @@ Laravel parser with Admin UI.
 
 - Run UI:
   `php artisan serve`
+
+  ## Link for scraper ##
+- default - http://lifehacker.com/rss
 
 
 ## Issues
